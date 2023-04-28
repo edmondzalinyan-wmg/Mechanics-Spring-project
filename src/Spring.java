@@ -55,7 +55,7 @@ public class Spring {
 //      1/K = 1/k1 + 1/k2
         return new Spring(
                 1 /
-                        (1 / (this.getK() + 1 / that.getK()))
+                        (1 / this.getK() + 1 / that.getK())
         );
     }
 
