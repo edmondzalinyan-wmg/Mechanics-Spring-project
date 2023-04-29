@@ -6,13 +6,13 @@ public class SpringArray {
     private static int s;
 
     public static Spring equivalentSpring(String exp) {
-        Spring[] defaultSprings = new Spring[exp.length() / 2];
+        List<Spring> defaultSprings = new ArrayList<>();
         for (int i = 0; i < exp.length() / 2; i++)
-            defaultSprings[i] = new Spring();
+            defaultSprings.add(new Spring());
         return equivalentSpring(exp, defaultSprings);
     }
 
-    private static Spring rec(Stack<Character> stack, List<Character> list, Spring[] springs) {
+    private static Spring rec(Stack<Character> stack, List<Character> list, List<Spring> springs) {
         char c = list.get(0);
         char next = list.get(1);
         stack.push(c);
@@ -21,7 +21,7 @@ public class SpringArray {
                 || (stack.peek() == '[' && next == ']')) {
             stack.pop();
             trim(list, 1);
-            return springs[s++];
+            return springs.get(s++);
         }
         List<Spring> parallels = new ArrayList<>();
         List<Spring> series = new ArrayList<>();
@@ -36,8 +36,7 @@ public class SpringArray {
             return Spring.inSeries(series);
         }
     }
-
-    public static Spring equivalentSpring(String springExpr, Spring[] springs) {
+    public static Spring equivalentSpring(String springExpr, List<Spring> springs) {
         Stack<Character> stack = new Stack<>();
         List<Character> e = new ArrayList<>();
         for (char c : springExpr.toCharArray()) {
