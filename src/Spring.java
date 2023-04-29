@@ -36,7 +36,7 @@ public class Spring {
         double A = v0 / w;
         double B = x0;
 
-        int n = (int) ((t1 - t0) / dt) + 1;
+        int n = ((int) ((t1 - t0) / dt)) + 1;
         double[] coordinates = new double[n];
         for (int i = 0; i < n; i++) {
             double tt = t0 + dt * i;
