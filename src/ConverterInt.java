@@ -1,17 +1,21 @@
-public class Converter8Bit extends Converter {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ConverterInt extends Converter {
     @Override
     Spring createSpring(char[] bits) {
         StringBuilder expression = new StringBuilder("[");
         int powerOfTwo = 1;
+        List<Spring> springs = new ArrayList<>();
         for (int i = bits.length - 1; i >= 0; i--) {
             if (bits[i] == '1') {
-                for (int j = 0; j < powerOfTwo; j++)
-                    expression.append("[]");
+                springs.add(new Spring(powerOfTwo));
+                expression.append("[]");
             }
             powerOfTwo *= 2;
         }
         expression.append("]");
-        return SpringArray.equivalentSpring(expression.toString());
+        return SpringArray.equivalentSpring(expression.toString(), springs);
     }
 
     @Override
